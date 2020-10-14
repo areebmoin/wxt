@@ -9,7 +9,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\TitleResolverInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Link;
-use Drupal\Core\Path\AliasManagerInterface;
+use Drupal\path_alias\AliasManagerInterface;
 use Drupal\Core\Path\CurrentPathStack;
 use Drupal\Core\PathProcessor\InboundPathProcessorInterface;
 use Drupal\Core\Path\PathValidator;
@@ -88,7 +88,7 @@ class BlogBreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
   /**
    * The alias manager.
    *
-   * @var \Drupal\Core\Path\AliasManagerInterface
+   * @var \Drupal\path_alias\AliasManagerInterface
    */
   protected $aliasManager;
 
@@ -115,7 +115,7 @@ class BlogBreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
    *   The language manager.
    * @param \Drupal\Core\Path\PathValidator $pathValidator
    *   The path validator.
-   * @param \Drupal\Core\Path\AliasManager $alias_manager
+   * @param \Drupal\path_alias\AliasManagerInterface $alias_manager
    *   The alias manager.
    */
   public function __construct(

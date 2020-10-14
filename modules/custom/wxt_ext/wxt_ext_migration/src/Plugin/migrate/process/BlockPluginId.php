@@ -83,7 +83,7 @@ class BlockPluginId extends ProcessPluginBase implements ContainerFactoryPluginI
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
-    $entity_manager = $container->get('entity.manager');
+    $entity_type_manager = $container->get('entity_type.manager');
     $migration_configuration = [
       'migration' => [
         'wxt_media',
@@ -106,11 +106,11 @@ class BlockPluginId extends ProcessPluginBase implements ContainerFactoryPluginI
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $entity_manager->getDefinition('block_content') ? $entity_manager->getStorage('block_content') : NULL,
+      $entity_type_manager->getDefinition('block_content') ? $entity_type_manager->getStorage('block_content') : NULL,
       $container->get('plugin.manager.migrate.process')->createInstance('migration', $migration_configuration, $migration),
       $container->get('uuid'),
       $container->get('plugin.manager.block'),
-      $entity_manager->hasHandler('block', 'storage') ? $entity_manager->getStorage('block') : NULL
+      $entity_type_manager->hasHandler('block', 'storage') ? $entity_type_manager->getStorage('block') : NULL
     );
   }
 
