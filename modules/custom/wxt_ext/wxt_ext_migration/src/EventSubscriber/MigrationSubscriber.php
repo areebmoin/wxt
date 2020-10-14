@@ -15,6 +15,7 @@ use Drupal\migrate\Event\MigratePreRowSaveEvent;
 use Drupal\migrate\Event\MigratePostRowSaveEvent;
 use Drupal\panelizer\PanelizerInterface;
 use Drupal\Component\Uuid\UuidInterface;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -87,6 +88,13 @@ class MigrationSubscriber implements EventSubscriberInterface {
   protected $panelizer;
 
   /**
+   * The temporary store.
+   *
+   * @var \Drupal\Core\TempStore\SharedTempStoreFactory
+   */
+  protected $tempstore;
+
+  /**
    * The path alias storage.
    *
    * @var \Drupal\path_alias\AliasRepositoryInterface
@@ -114,6 +122,8 @@ class MigrationSubscriber implements EventSubscriberInterface {
    *   The cache tag invalidator.
    * @param \Drupal\panelizer\PanelizerInterface $panelizer
    *   The Panelizer service.
+   * @param \Drupal\Core\TempStore\SharedTempStoreFactory $tempstore
+   *   The tempstore factory.
    * @param \Drupal\Core\Path\AliasRepositoryInterface $alias_storage
    *   The path alias storage.
    */
@@ -126,6 +136,7 @@ class MigrationSubscriber implements EventSubscriberInterface {
                               UuidInterface $uuid_service,
                               CacheTagsInvalidatorInterface $invalidator,
                               PanelizerInterface $panelizer,
+                              SharedTempStoreFactory $tempstore,
                               AliasRepositoryInterface $alias_storage) {
     $this->database = $database;
     $this->entityTypeManager = $entity_type_manager;
@@ -136,6 +147,7 @@ class MigrationSubscriber implements EventSubscriberInterface {
     $this->uuidService = $uuid_service;
     $this->invalidator = $invalidator;
     $this->panelizer = $panelizer;
+    $this->tempstore = $tempstore;
     $this->aliasStorage = $alias_storage;
   }
 

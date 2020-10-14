@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-
 /**
  * Rebuilds the menu router to ensure image derivatives are created.
  */
